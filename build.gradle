@@ -1,0 +1,37 @@
+plugins {
+	id 'java'
+	alias(libs.plugins.spring.boot)
+	alias(libs.plugins.spring.dependency.management)
+}
+
+group = 'de.gre90r'
+version = '0.0.1'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation(libs.bundles.starter.spring)
+	implementation(libs.bundles.starter.web)
+//	implementation(libs.bundles.starter.db)
+
+	implementation(libs.lombok)
+	annotationProcessor(libs.lombok)
+
+//	runtimeOnly(libs.postgres)
+
+//	testRuntimeOnly(libs.h2)
+	testImplementation(libs.bundles.starter.test)
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

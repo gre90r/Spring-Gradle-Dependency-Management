@@ -1,0 +1,38 @@
+rootProject.name = 'spring-gradle-dependency-management'
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      version('spring.boot', '3.0.4')
+      version('spring.dependency.management', '1.1.0')
+
+      library('spring.boot', 'org.springframework.boot', 'spring-boot-starter').withoutVersion()
+      library('spring.data.jpa', 'org.springframework.boot', 'spring-boot-starter-data-jpa').withoutVersion()
+      library('spring.actuator', 'org.springframework.boot', 'spring-boot-starter-actuator').withoutVersion()
+      library('spring.web', 'org.springframework.boot', 'spring-boot-starter-web').withoutVersion()
+      library('spring.test', 'org.springframework.boot', 'spring-boot-starter-test').withoutVersion()
+      library('flyway', 'org.flywaydb', 'flyway-core').withoutVersion()
+      library('postgres', 'org.postgresql', 'postgresql').withoutVersion()
+      library('lombok', 'org.projectlombok', 'lombok').withoutVersion()
+      library('h2', 'com.h2database', 'h2').withoutVersion()
+
+      plugin('spring.boot', 'org.springframework.boot').versionRef('spring.boot')
+      plugin('spring.dependency.management', 'io.spring.dependency-management').versionRef('spring.dependency.management')
+
+      bundle('starter.spring', [
+        'spring.boot',
+        'spring.actuator',
+      ])
+      bundle('starter.web', [
+        'spring.web',
+      ])
+      bundle('starter.db', [
+        'spring.data.jpa',
+        'flyway',
+      ])
+      bundle('starter.test', [
+        'spring.test'
+      ])
+    }
+  }
+}
